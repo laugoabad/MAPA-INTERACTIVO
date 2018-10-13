@@ -33,7 +33,6 @@ lugaresModulo = (function () {
           type: tipoDeLugar,
         }, callback);
 
-
       function callback(results, status) {
 
         if (status === google.maps.places.PlacesServiceStatus.OK) {
