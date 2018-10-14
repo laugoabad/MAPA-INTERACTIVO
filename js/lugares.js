@@ -1,6 +1,9 @@
 lugaresModulo = (function () {
   var servicioLugares // Servicio para obtener lugares cercanos e información de lugares(como fotos, puntuación del lugar,etc).
   var infowindow;
+  var marcadores = [];
+
+
     // Completa las direcciones ingresadas por el usuario a y establece los límites
     // con un círculo cuyo radio es de 20000 metros.
   function autocompletar () {
@@ -24,9 +27,9 @@ lugaresModulo = (function () {
         var servicioLugares = new google.maps.places.PlacesService(mapa);
         var radio = document.getElementById('radio').value;
         var tipoDeLugar = document.getElementById('tipoDeLugar').value;
-  
       alert('tipo de lugar '+tipoDeLugar);
         alert('radio dentro de lugares '+radio);
+
         servicioLugares.nearbySearch({
           location: posicion,
           radius: radio,
@@ -34,14 +37,21 @@ lugaresModulo = (function () {
         }, callback);
 
       function callback(results, status) {
-
+        borrarTodosLosMarcadores();
         if (status === google.maps.places.PlacesServiceStatus.OK) {
           for (var i = 0; i < results.length; i++) {
-            //alert('places '+results[i].name);
+          alert('places '+results[i].name);
             createMarker(results[i]);
+
           }
         }
       }
+
+    function borrarTodosLosMarcadores() {
+      for (var i = 0; i < marcadores.length; i++) {
+        marcadores[i].setMap(null);
+      }
+    }
 
       function createMarker(place) {
         var placeLoc = place.geometry.location;
@@ -49,7 +59,7 @@ lugaresModulo = (function () {
           map: mapa,
           position: place.geometry.location
         });
-
+        marcadores.push(marker);
         google.maps.event.addListener(marker, 'click', function() {
           infowindow.setContent(place.name);
           infowindow.open(map, this);
