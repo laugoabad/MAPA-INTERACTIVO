@@ -22,30 +22,29 @@ lugaresModulo = (function () {
     // Busca lugares con el tipo especificado en el campo de TipoDeLugar
 
   function buscarCerca (posicion) {
-
         infowindow = new google.maps.InfoWindow();
         var servicioLugares = new google.maps.places.PlacesService(mapa);
         var radio = document.getElementById('radio').value;
         var tipoDeLugar = document.getElementById('tipoDeLugar').value;
-      alert('tipo de lugar '+tipoDeLugar);
-        alert('radio dentro de lugares '+radio);
-
         servicioLugares.nearbySearch({
           location: posicion,
           radius: radio,
           type: tipoDeLugar,
-        }, callback);
+        }, marcadorModulo.marcarLugares);
 
-      function callback(results, status) {
-        borrarTodosLosMarcadores();
-        if (status === google.maps.places.PlacesServiceStatus.OK) {
-          for (var i = 0; i < results.length; i++) {
-          alert('places '+results[i].name);
-            createMarker(results[i]);
 
-          }
-        }
-      }
+      // function callback(results, status) {
+      //   //borrarTodosLosMarcadores();
+      //   if (status === google.maps.places.PlacesServiceStatus.OK) {
+      //     for (var i = 0; i < results.length; i++) {
+      //     alert('places '+results[i].name);
+      //        marcadorModulo.marcarLugares(results[i]);
+      //
+      //       //createMarker(results[i]);
+      //
+      //     }
+      //   }
+      // }
 
     function borrarTodosLosMarcadores() {
       for (var i = 0; i < marcadores.length; i++) {
@@ -53,18 +52,18 @@ lugaresModulo = (function () {
       }
     }
 
-      function createMarker(place) {
-        var placeLoc = place.geometry.location;
-        var marker = new google.maps.Marker({
-          map: mapa,
-          position: place.geometry.location
-        });
-        marcadores.push(marker);
-        google.maps.event.addListener(marker, 'click', function() {
-          infowindow.setContent(place.name);
-          infowindow.open(map, this);
-        });
-      }
+      // function createMarker(place) {
+      //   var placeLoc = place.geometry.location;
+      //   var marker = new google.maps.Marker({
+      //     map: mapa,
+      //     position: place.geometry.location
+      //   });
+      //   marcadores.push(marker);
+      //   google.maps.event.addListener(marker, 'click', function() {
+      //     infowindow.setContent(place.name);
+      //     infowindow.open(map, this);
+      //   });
+      // }
 
 
 
