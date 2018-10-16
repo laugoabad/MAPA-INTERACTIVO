@@ -218,6 +218,7 @@ marcadorModulo = (function () {
     // Marca los lugares que están en el arreglo resultados y
     // extiende los límites del mapa teniendo en cuenta los nuevos lugares
   function marcarLugares (resultados, status) {
+    noMostrarMarcadores(marcadores);
     if (status === google.maps.places.PlacesServiceStatus.OK) {
       for (var i = 0; i < resultados.length; i++) {
       //alert('desde marcalugares pasa los lugares para crear el marcador '+resultados[i].name);

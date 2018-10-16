@@ -1,12 +1,15 @@
 lugaresModulo = (function () {
   var servicioLugares // Servicio para obtener lugares cercanos e información de lugares(como fotos, puntuación del lugar,etc).
   var infowindow;
-  var marcadores = [];
-
-
     // Completa las direcciones ingresadas por el usuario a y establece los límites
     // con un círculo cuyo radio es de 20000 metros.
   function autocompletar () {
+    var input = document.getElementById('direccion');
+    var opciones = {}
+    var textoAutocompletado = new google.maps.places.Autocomplete(input, opciones);
+    textoAutocompletado.bindTo('bounds', mapa);
+
+
         /* Completar la función autocompletar(): autocompleta los 4 campos de texto de la
         página (las direcciones ingresables por el usuario).
         Para esto creá un círculo con radio de 20000 metros y usalo para fijar
@@ -15,7 +18,7 @@ lugaresModulo = (function () {
 
     // Inicializo la variable servicioLugares y llamo a la función autocompletar
   function inicializar () {
-    servicioLugares = new google.maps.places.PlacesService(mapa)
+    servicioLugares = new google.maps.places.PlacesService(mapa);
     autocompletar()
   }
 
@@ -31,41 +34,6 @@ lugaresModulo = (function () {
           radius: radio,
           type: tipoDeLugar,
         }, marcadorModulo.marcarLugares);
-
-
-      // function callback(results, status) {
-      //   //borrarTodosLosMarcadores();
-      //   if (status === google.maps.places.PlacesServiceStatus.OK) {
-      //     for (var i = 0; i < results.length; i++) {
-      //     alert('places '+results[i].name);
-      //        marcadorModulo.marcarLugares(results[i]);
-      //
-      //       //createMarker(results[i]);
-      //
-      //     }
-      //   }
-      // }
-
-    function borrarTodosLosMarcadores() {
-      for (var i = 0; i < marcadores.length; i++) {
-        marcadores[i].setMap(null);
-      }
-    }
-
-      // function createMarker(place) {
-      //   var placeLoc = place.geometry.location;
-      //   var marker = new google.maps.Marker({
-      //     map: mapa,
-      //     position: place.geometry.location
-      //   });
-      //   marcadores.push(marker);
-      //   google.maps.event.addListener(marker, 'click', function() {
-      //     infowindow.setContent(place.name);
-      //     infowindow.open(map, this);
-      //   });
-      // }
-
-
 
 
         /* Completar la función buscarCerca  que realice la búsqueda de los lugares

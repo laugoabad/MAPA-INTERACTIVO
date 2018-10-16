@@ -4,7 +4,7 @@ var mapa
 var posicionCentral = {lat: -34.5337142, lng: -58.47869259999999}
 // Inicializa el mapa con un valor de zoom y una locación en el medio
 function inicializarMapa () {
-   mapa = new google.maps.Map(document.getElementById('map'), {center: posicionCentral, zoom: 10})
+   mapa = new google.maps.Map(document.getElementById('map'), {center: posicionCentral, zoom: 12})
 
     /* Modificá la variable mapa con el constructor Map().
     Tendrás que asignarle un valor de zoom y
@@ -14,4 +14,5 @@ function inicializarMapa () {
   marcadorModulo.inicializar()
   direccionesModulo.inicializar()
   lugaresModulo.inicializar()
+  streetViewModulo.inicializar()
 }
