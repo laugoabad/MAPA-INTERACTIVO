@@ -7,7 +7,7 @@ lugaresModulo = (function () {
     var input = document.getElementById('direccion');
     var opciones = {}
     var textoAutocompletado = new google.maps.places.Autocomplete(input, opciones);
-    textoAutocompletado.bindTo('bounds', mapa);
+
 
 
         /* Completar la función autocompletar(): autocompleta los 4 campos de texto de la

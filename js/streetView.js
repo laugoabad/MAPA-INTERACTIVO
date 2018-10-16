@@ -12,7 +12,6 @@ streetViewModulo = (function () {
         },
         zoom: 1
       });
-     //mapa.setStreetView(panorama);
     }
 
         /* Completar la función inicializar()  que crea un panorama
