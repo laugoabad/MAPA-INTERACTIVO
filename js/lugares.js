@@ -3,11 +3,6 @@ lugaresModulo = (function () {
   var infowindow;
     // Completa las direcciones ingresadas por el usuario a y establece los límites
   //   // con un círculo cuyo radio es de 20000 metros.
-  // function autocompletar () {
-  //   var input = document.getElementById('direccion');
-  //   var opciones = {}
-  //   var textoAutocompletado = new google.maps.places.Autocomplete(input, opciones);
-
 
     function Autocompletar(mapa) {
             this.mapa = mapa;
@@ -15,24 +10,27 @@ lugaresModulo = (function () {
             this.origen = null;
             this.destino = null;
             this.modo = 'CAMINANDO';
-            this.intermedioAAgregar = null;
-            var direccion = document.getElementById('direccion')
+            //this.intermedioAAgregar = null;
+            var direccion = document.getElementById('direccion'); alert('direccion '+direccion);
             var desde = document.getElementById('desde');
             var hasta = document.getElementById('hasta');
             var selectorMedioDeTransprte = document.getElementById('comoIr');
-            var agregar = document.getElementById('agregar');
-            this.directionsService = new google.maps.DirectionsService;
-            this.directionsDisplay = new google.maps.DirectionsRenderer;
-            this.directionsDisplay.setMap(mapa);
+            var lugaresIntermedios = document.getElementById('puntosIntermedios');
+            // this.directionsService = new google.maps.DirectionsService;
+            // this.directionsDisplay = new google.maps.DirectionsRenderer;
+            // this.directionsDisplay.setMap(mapa);
 
             var autocompletarDireccion = new google.maps.places.Autocomplete(
                 direccion, {placeIdOnly: true});
+                alert('direccion de Autocompletar '+autocompletarDireccion.value);
             var autocompletarOrigen = new google.maps.places.Autocomplete(
                 desde, {placeIdOnly: true});
             var autocompletarDestino = new google.maps.places.Autocomplete(
                 hasta, {placeIdOnly: true});
             var autocompletarIntermedio = new google.maps.places.Autocomplete(
                 agregar, {placeIdOnly: true}) ;
+
+
 
             // this.setupClickListener('auto', 'AUTO');
             // this.setupClickListener('caminando', 'CAMINANDO');
@@ -132,6 +130,7 @@ lugaresModulo = (function () {
   }
   return {
     inicializar,
-    buscarCerca
+    buscarCerca,
+
   }
 })()
