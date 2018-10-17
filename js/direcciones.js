@@ -80,6 +80,7 @@ direccionesModulo = (function () {
         direccionesModulo.calcularYMostrarRutas()
       }
     })
+
     servicioDirecciones = new google.maps.DirectionsService()
     mostradorDirecciones = new google.maps.DirectionsRenderer({
       draggable: true,

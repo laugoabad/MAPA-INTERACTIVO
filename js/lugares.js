@@ -15,10 +15,12 @@ lugaresModulo = (function () {
             this.origen = null;
             this.destino = null;
             this.modo = 'CAMINANDO';
+            this.intermedioAAgregar = null;
             var direccion = document.getElementById('direccion')
             var desde = document.getElementById('desde');
             var hasta = document.getElementById('hasta');
             var selectorMedioDeTransprte = document.getElementById('comoIr');
+            var agregar = document.getElementById('agregar');
             this.directionsService = new google.maps.DirectionsService;
             this.directionsDisplay = new google.maps.DirectionsRenderer;
             this.directionsDisplay.setMap(mapa);
@@ -29,69 +31,69 @@ lugaresModulo = (function () {
                 desde, {placeIdOnly: true});
             var autocompletarDestino = new google.maps.places.Autocomplete(
                 hasta, {placeIdOnly: true});
+            var autocompletarIntermedio = new google.maps.places.Autocomplete(
+                agregar, {placeIdOnly: true}) ;
 
-            this.setupClickListener('auto', 'AUTO');
-            this.setupClickListener('caminando', 'CAMINANDO');
-            this.setupClickListener('transporte-publico', 'TRANSPORTE PUBLICO');
+            // this.setupClickListener('auto', 'AUTO');
+            // this.setupClickListener('caminando', 'CAMINANDO');
+            // this.setupClickListener('transporte-publico', 'TRANSPORTE PUBLICO');
 
-            this.setupPlaceChangedListener(autocompletarDireccion, 'DIRECCION');
-            this.setupPlaceChangedListener(autocompletarOrigen, 'ORIG');
-            this.setupPlaceChangedListener(autocompletarDestino, 'DEST');
-
+            // this.setupCambioDireccionListener(autocompletarDireccion, 'DIRECCION');
+            // this.setupCambioDireccionListener(autocompletarOrigen, 'ORIG');
+            // this.setupCambioDireccionListener(autocompletarDestino, 'DEST');
+            // this.setupCambioDireccionListener(autocompletarIntermedio, 'INTERM');
             // this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(desde);
             // this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(hasta);
             // this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(selectorMedioDeTransprte);
           }
 
+          // Autocompletar.prototype.setupClickListener = function(id, modo) {
+          //   var radioButton = document.getElementById(id);
+          //   var that = this;
+          //   radioButton.addEventListener('click', function() {
+          //     that.modo = modo;
+          //     that.route();
+          //   });
+          // };
 
-
-          Autocompletar.prototype.setupClickListener = function(id, modo) {
-            var radioButton = document.getElementById(id);
-            var that = this;
-            radioButton.addEventListener('click', function() {
-              that.modo = modo;
-              that.route();
-            });
-          };
-
-          Autocompletar.prototype.setupPlaceChangedListener = function(autocompletar, modo) {
-            var that = this;
-            autocompletar.bindTo('bounds', this.mapa);
-            autocompletar.addListener('place_changed', function() {
-              var lugar = autocomplete.getPlace();
-              if (!lugar.place_id) {
-                window.alert("Please select an option from the dropdown list.");
-                return;
-              }
-              if (modo === 'ORIG') {
-                that.origen = lugar.place_id;
-              } else {
-                that.destino = lugar.place_id;
-              }
-              that.route();
-            });
-
-          };
-
-
-
-          Autocompletar.prototype.route = function() {
-             if (!this.origen || !this.destino) {
-               return;
-             }
-             var that = this;
-             this.directionsService.route({
-               origin: {'placeId': this.origen},
-               destination: {'placeId': this.destino},
-               travelMode: this.modo
-             }, function(response, status) {
-               if (status === 'OK') {
-                that.directionsDisplay.setDirections(response);
-               } else {
-                 window.alert('Directions request failed due to ' + status);
-               }
-             });
-           };
+          // Autocompletar.prototype.setupCambioDireccionListener = function(autocompletar, modo) {
+          //   var that = this;
+          //   autocompletar.bindTo('bounds', this.mapa);
+          //   autocompletar.addListener('place_changed', function() {
+          //     var lugar = autocompletar.getPlace();
+          //     if (!lugar.place_id) {
+          //       window.alert("Please select an option from the dropdown list.");
+          //       return;
+          //     }
+          //     if (modo === 'ORIG') {
+          //       that.origen = lugar.place_id;
+          //     } else {
+          //       that.destino = lugar.place_id;
+          //     }
+          //     that.route();
+          //   });
+          //
+          // };
+          //
+          //
+          //
+          // Autocompletar.prototype.route = function() {
+          //    if (!this.origen || !this.destino) {
+          //      return;
+          //    }
+          //    var that = this;
+          //    this.directionsService.route({
+          //      origin: {'placeId': this.origen},
+          //      destination: {'placeId': this.destino},
+          //      travelMode: this.modo
+          //    }, function(response, status) {
+          //      if (status === 'OK') {
+          //       that.directionsDisplay.setDirections(response);
+          //      } else {
+          //        window.alert('Directions request failed due to ' + status);
+          //      }
+          //    });
+          //  };
 
 
 

@@ -25,18 +25,19 @@ geocodificadorModulo = (function () {
   function inicializar () {
     var that = this;
     geocodificador = new google.maps.Geocoder();
-        // cuando se presiona la tecla enter en el campo direccion, se agrega la dirección y se muestra en el mapa
-    document.querySelector('#direccion').addEventListener('keypress', function (e) {
-      var key = e.which || e.keyCode
-      if (key === 13) { // 13 is enter
-                // code for enter
 
-        var direccion = document.getElementById('direccion').value;
-        //console.log('direccion ',direccion);
-        that.usaDireccion(direccion, direccionesModulo.agregarDireccionYMostrarEnMapa);
+    document.getElementById('direccion').addEventListener('change', function () {
+    var direccion = document.getElementById('direccion').value;
+    that.usaDireccion(direccion, direccionesModulo.agregarDireccionYMostrarEnMapa);
+  });
+    //     // cuando se presiona la tecla enter en el campo direccion, se agrega la dirección y se muestra en el mapa
+    // document.querySelector('#direccion').addEventListener('keypress', function (e) {
+    //   var key = e.which || e.keyCode
+    //   if (key === 13) { // 13 is enter
+    //             // code for enter
+
+
       }
-    })
-  }
 
   return {
     usaDireccion,
