@@ -7,7 +7,7 @@ marcadorModulo = (function () {
 
     // Crea un marcador y lo muestra en el mapa
   function mostrarMiMarcador (ubicacion) {
-    var miMarcador = new google.maps.Marker({
+    var miMarcador = new google.maps.Marker {alert('entra a mostrar mi marcador ' + position);
       position: ubicacion,
       map: mapa,
       animation: google.maps.Animation.DROP,
@@ -75,8 +75,6 @@ marcadorModulo = (function () {
 
   var rango = document.getElementById('radio');
   rango.addEventListener('change', function () {
-    alert('radio '+rango.value);
-    //noMostrarMarcadores(marcadores);
     marcadorModulo.marcar()
   })
 
@@ -166,22 +164,29 @@ marcadorModulo = (function () {
     // cuando se hace clic en AgregarDirecciones
   function inicializar () {
         // Muestra marcador cuando se presioná enteren el campo direccion
-    $('#direccion').keypress(function (e) {
-      if (e.keyCode == 13) {
-        marcadorModulo.mostrarMiMarcador()
-      }
-    })
+    //   var nuevaDireccion = document.getElementById('direccion');
+    //     nuevaDireccion.addEventListener('change', function () {
+    // // $('#direccion').keypress(function (e) {
+    // //   if (e.keyCode == 13) {
+    //     //marcadorModulo.mostrarMiMarcador()
+    //   })
+    // })
     infoVentana = new google.maps.InfoWindow()
     limites = new google.maps.LatLngBounds()
   }
 
     // Función que devuelve true si ya se declaro la variable miMarcador
   function existeMiMarcador () {
+  if (miMarcador != undefined) {
+    alert('mi marcador esta definido')
+  }else{
+    alert('marcador no esta definido')
+  }
     return miMarcador != undefined
   }
 
     // Devuelve la posicion de la variable miMarcador
-  function damePosicion () {
+  function damePosicion () {alert('entra a dame posicion');
     return miMarcador.getPosition()
   }
 
@@ -206,7 +211,7 @@ marcadorModulo = (function () {
       })
       limites.extend(ubicacion)
       google.maps.event.addListener(marcador, 'click', function () {
-        streetViewModulo.fijarStreetView(marcador.position)
+       streetViewModulo.fijarStreetView(marcador.position)
       })
 
       marcadoresRuta.push(marcador)
@@ -218,10 +223,9 @@ marcadorModulo = (function () {
     // Marca los lugares que están en el arreglo resultados y
     // extiende los límites del mapa teniendo en cuenta los nuevos lugares
   function marcarLugares (resultados, status) {
-    noMostrarMarcadores(marcadores);
+    //noMostrarMarcadores(marcadores);
     if (status === google.maps.places.PlacesServiceStatus.OK) {
       for (var i = 0; i < resultados.length; i++) {
-      //alert('desde marcalugares pasa los lugares para crear el marcador '+resultados[i].name);
         crearMarcador(resultados[i])
         extenderLimites(resultados[i])
       }
@@ -231,13 +235,13 @@ marcadorModulo = (function () {
     // Marco los lugares cerca de mi posición
   function marcar () {
     //borrarMarcadores(marcadores)
-
     //alert('lugar: ' + document.getElementById('tipoDeLugar').value);
-    if (marcadorModulo.existeMiMarcador()) {
+    if (marcadorModulo.existeMiMarcador()) {alert('entra en if');
       var miPosicion = marcadorModulo.damePosicion()
-    } else {
+    } else {alert('entra en else');
       miPosicion = posicionCentral
     }
+    //alert('miposicion '+  marcadorModulo.damePosicion());
     lugaresModulo.buscarCerca(miPosicion)
         // cambio el centro del mapa a miPosicion
     mapa.panTo(miPosicion)

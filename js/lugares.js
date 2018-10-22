@@ -3,97 +3,38 @@ lugaresModulo = (function () {
   var infowindow;
     // Completa las direcciones ingresadas por el usuario a y establece los límites
   //   // con un círculo cuyo radio es de 20000 metros.
+    function autocompletar() {
 
-    function Autocompletar(mapa) {
-            this.mapa = mapa;
             this.direccion = null;
             this.origen = null;
             this.destino = null;
             this.modo = 'CAMINANDO';
             //this.intermedioAAgregar = null;
-            var direccion = document.getElementById('direccion'); alert('direccion '+direccion);
-            var desde = document.getElementById('desde');
-            var hasta = document.getElementById('hasta');
+
             var selectorMedioDeTransprte = document.getElementById('comoIr');
             var lugaresIntermedios = document.getElementById('puntosIntermedios');
             // this.directionsService = new google.maps.DirectionsService;
             // this.directionsDisplay = new google.maps.DirectionsRenderer;
             // this.directionsDisplay.setMap(mapa);
 
-            var autocompletarDireccion = new google.maps.places.Autocomplete(
-                direccion, {placeIdOnly: true});
-                alert('direccion de Autocompletar '+autocompletarDireccion.value);
-            var autocompletarOrigen = new google.maps.places.Autocomplete(
-                desde, {placeIdOnly: true});
-            var autocompletarDestino = new google.maps.places.Autocomplete(
-                hasta, {placeIdOnly: true});
-            var autocompletarIntermedio = new google.maps.places.Autocomplete(
-                agregar, {placeIdOnly: true}) ;
+            var circulo = new google.maps.Circle ({
+              center: posicionCentral,
+              radius: 20000
+            });
 
+            var direccionAutocompletada = new google.maps.places.Autocomplete(
+                document.getElementById('direccion'));
+            var origenAutocompletado = new google.maps.places.Autocomplete(
+                document.getElementById('desde'));
+            var destinoAutocompletado = new google.maps.places.Autocomplete(
+                document.getElementById('hasta'));
+            var intermedio = new google.maps.places.Autocomplete(
+                agregar) ;
 
-
-            // this.setupClickListener('auto', 'AUTO');
-            // this.setupClickListener('caminando', 'CAMINANDO');
-            // this.setupClickListener('transporte-publico', 'TRANSPORTE PUBLICO');
-
-            // this.setupCambioDireccionListener(autocompletarDireccion, 'DIRECCION');
-            // this.setupCambioDireccionListener(autocompletarOrigen, 'ORIG');
-            // this.setupCambioDireccionListener(autocompletarDestino, 'DEST');
-            // this.setupCambioDireccionListener(autocompletarIntermedio, 'INTERM');
-            // this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(desde);
-            // this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(hasta);
-            // this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(selectorMedioDeTransprte);
+           direccionAutocompletada.setBounds(circulo.getBounds());
+           origenAutocompletado.setBounds(circulo.getBounds());
+           destinoAutocompletado.setBounds(circulo.getBounds());
           }
-
-          // Autocompletar.prototype.setupClickListener = function(id, modo) {
-          //   var radioButton = document.getElementById(id);
-          //   var that = this;
-          //   radioButton.addEventListener('click', function() {
-          //     that.modo = modo;
-          //     that.route();
-          //   });
-          // };
-
-          // Autocompletar.prototype.setupCambioDireccionListener = function(autocompletar, modo) {
-          //   var that = this;
-          //   autocompletar.bindTo('bounds', this.mapa);
-          //   autocompletar.addListener('place_changed', function() {
-          //     var lugar = autocompletar.getPlace();
-          //     if (!lugar.place_id) {
-          //       window.alert("Please select an option from the dropdown list.");
-          //       return;
-          //     }
-          //     if (modo === 'ORIG') {
-          //       that.origen = lugar.place_id;
-          //     } else {
-          //       that.destino = lugar.place_id;
-          //     }
-          //     that.route();
-          //   });
-          //
-          // };
-          //
-          //
-          //
-          // Autocompletar.prototype.route = function() {
-          //    if (!this.origen || !this.destino) {
-          //      return;
-          //    }
-          //    var that = this;
-          //    this.directionsService.route({
-          //      origin: {'placeId': this.origen},
-          //      destination: {'placeId': this.destino},
-          //      travelMode: this.modo
-          //    }, function(response, status) {
-          //      if (status === 'OK') {
-          //       that.directionsDisplay.setDirections(response);
-          //      } else {
-          //        window.alert('Directions request failed due to ' + status);
-          //      }
-          //    });
-          //  };
-
-
 
 
 
@@ -105,13 +46,13 @@ lugaresModulo = (function () {
 
     // Inicializo la variable servicioLugares y llamo a la función autocompletar
   function inicializar () {
-    servicioLugares = new google.maps.places.PlacesService(mapa);
-    var autocompletar = new Autocompletar(mapa);
+    autocompletar();
   }
 
     // Busca lugares con el tipo especificado en el campo de TipoDeLugar
 
   function buscarCerca (posicion) {
+    //alert('posicion dentro de buscar cerca '+posicion.geometry.location);
         infowindow = new google.maps.InfoWindow();
         var servicioLugares = new google.maps.places.PlacesService(mapa);
         var radio = document.getElementById('radio').value;

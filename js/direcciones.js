@@ -62,7 +62,7 @@ direccionesModulo = (function () {
     calcularRutasConClic()
         // Agrega la direccion cuando se presioná enter en el campo agregar
     $('#agregar').keypress(function (e) {
-      if (e.keyCode == 13) {
+    if (e.keyCode == 13) {
         var direccion = document.getElementById('agregar').value
         geocodificadorModulo.usaDireccion(direccion, direccionesModulo.agregarDireccion)
       }

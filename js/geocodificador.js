@@ -27,9 +27,10 @@ geocodificadorModulo = (function () {
     geocodificador = new google.maps.Geocoder();
 
     document.getElementById('direccion').addEventListener('change', function () {
-    var direccion = document.getElementById('direccion').value;
-    that.usaDireccion(direccion, direccionesModulo.agregarDireccionYMostrarEnMapa);
-  });
+      var direccion = document.getElementById('direccion').value;
+      that.usaDireccion(direccion, direccionesModulo.agregarDireccionYMostrarEnMapa);
+    });
+  }
     //     // cuando se presiona la tecla enter en el campo direccion, se agrega la dirección y se muestra en el mapa
     // document.querySelector('#direccion').addEventListener('keypress', function (e) {
     //   var key = e.which || e.keyCode
@@ -37,7 +38,7 @@ geocodificadorModulo = (function () {
     //             // code for enter
 
 
-      }
+
 
   return {
     usaDireccion,
