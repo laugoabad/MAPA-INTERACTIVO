@@ -5,12 +5,6 @@ lugaresModulo = (function () {
   //   // con un círculo cuyo radio es de 20000 metros.
     function autocompletar() {
 
-            this.direccion = null;
-            this.origen = null;
-            this.destino = null;
-            this.modo = 'CAMINANDO';
-            //this.intermedioAAgregar = null;
-
             var selectorMedioDeTransprte = document.getElementById('comoIr');
             var lugaresIntermedios = document.getElementById('puntosIntermedios');
             // this.directionsService = new google.maps.DirectionsService;

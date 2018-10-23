@@ -7,12 +7,14 @@ marcadorModulo = (function () {
 
     // Crea un marcador y lo muestra en el mapa
   function mostrarMiMarcador (ubicacion) {
-    var miMarcador = new google.maps.Marker {alert('entra a mostrar mi marcador ' + position);
+
+    var miMarcador = new google.maps.Marker({
       position: ubicacion,
       map: mapa,
       animation: google.maps.Animation.DROP,
       title: 'Es Acá!',
-    });
+    })
+    alert('entra a mostrar mi marcador ' + miMarcador.position);
   }
         /* Completar la función mostrarMiMarcador() para crear un marcador
         en la posición pasada por parámetro y mostrarlo en el mapa.
@@ -164,24 +166,20 @@ marcadorModulo = (function () {
     // cuando se hace clic en AgregarDirecciones
   function inicializar () {
         // Muestra marcador cuando se presioná enteren el campo direccion
-    //   var nuevaDireccion = document.getElementById('direccion');
-    //     nuevaDireccion.addEventListener('change', function () {
-    // // $('#direccion').keypress(function (e) {
-    // //   if (e.keyCode == 13) {
-    //     //marcadorModulo.mostrarMiMarcador()
-    //   })
-    // })
+      var nuevaDireccion = document.getElementById('direccion');
+
+        nuevaDireccion.addEventListener('change', function () {
+        marcadorModulo.mostrarMiMarcador(nuevaDireccion.position);
+        alert('estra en inicializar dee marcadores'+nuevaDireccion.position)
+      })
+
     infoVentana = new google.maps.InfoWindow()
     limites = new google.maps.LatLngBounds()
   }
 
     // Función que devuelve true si ya se declaro la variable miMarcador
   function existeMiMarcador () {
-  if (miMarcador != undefined) {
-    alert('mi marcador esta definido')
-  }else{
-    alert('marcador no esta definido')
-  }
+    //alert('mi marcador '+miMarcador.position);
     return miMarcador != undefined
   }
 
@@ -223,7 +221,7 @@ marcadorModulo = (function () {
     // Marca los lugares que están en el arreglo resultados y
     // extiende los límites del mapa teniendo en cuenta los nuevos lugares
   function marcarLugares (resultados, status) {
-    //noMostrarMarcadores(marcadores);
+    noMostrarMarcadores(marcadores);
     if (status === google.maps.places.PlacesServiceStatus.OK) {
       for (var i = 0; i < resultados.length; i++) {
         crearMarcador(resultados[i])
@@ -238,7 +236,7 @@ marcadorModulo = (function () {
     //alert('lugar: ' + document.getElementById('tipoDeLugar').value);
     if (marcadorModulo.existeMiMarcador()) {alert('entra en if');
       var miPosicion = marcadorModulo.damePosicion()
-    } else {alert('entra en else');
+    } else {alert('entra en else de marcar ');
       miPosicion = posicionCentral
     }
     //alert('miposicion '+  marcadorModulo.damePosicion());

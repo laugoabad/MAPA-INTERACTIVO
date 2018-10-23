@@ -10,7 +10,6 @@ geocodificadorModulo = (function () {
      coordenada: la ubicación de tipo google.maps.LatLng */
 
      geocodificador.geocode({"address": direccion}, function(results, status) {
-      // alert('direccion '+ geocodificador.geocode.address);
       if (status === 'OK') {
         funcionALlamar(direccion, results[0].geometry.location);
       } else {
@@ -25,7 +24,7 @@ geocodificadorModulo = (function () {
   function inicializar () {
     var that = this;
     geocodificador = new google.maps.Geocoder();
-
+ alert('entra en iniciar de geocode');
     document.getElementById('direccion').addEventListener('change', function () {
       var direccion = document.getElementById('direccion').value;
       that.usaDireccion(direccion, direccionesModulo.agregarDireccionYMostrarEnMapa);
