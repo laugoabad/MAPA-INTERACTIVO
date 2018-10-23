@@ -24,10 +24,12 @@ geocodificadorModulo = (function () {
   function inicializar () {
     var that = this;
     geocodificador = new google.maps.Geocoder();
- alert('entra en iniciar de geocode');
-    document.getElementById('direccion').addEventListener('change', function () {
+    document.querySelector('#direccion').addEventListener('keypress', function (e) {
+      var key = e.which || e.keyCode
+        if (key === 13) {
       var direccion = document.getElementById('direccion').value;
       that.usaDireccion(direccion, direccionesModulo.agregarDireccionYMostrarEnMapa);
+    }
     });
   }
     //     // cuando se presiona la tecla enter en el campo direccion, se agrega la dirección y se muestra en el mapa

@@ -7,21 +7,18 @@ marcadorModulo = (function () {
 
     // Crea un marcador y lo muestra en el mapa
   function mostrarMiMarcador (ubicacion) {
-
-    var miMarcador = new google.maps.Marker({
+    //alert('ubicacion como parametro cuando entra a mostrar MI Marcador'+ubicacion);
+     miMarcador = new google.maps.Marker({
       position: ubicacion,
       map: mapa,
       animation: google.maps.Animation.DROP,
       title: 'Es Acá!',
     })
-    alert('entra a mostrar mi marcador ' + miMarcador.position);
   }
         /* Completar la función mostrarMiMarcador() para crear un marcador
         en la posición pasada por parámetro y mostrarlo en el mapa.
         Este marcador debe tener un título, una animación.
         El marcador que vas a crear debe asignarse a la variable miMarcador */
-
-
 
     // Agrega la dirección del marcador en la lista de Lugares Intermedios
   function agregarDireccionMarcador (marcador) {
@@ -64,25 +61,7 @@ marcadorModulo = (function () {
   }
     // Cuando cambia el elemento "tipoDeLugar" marco todos lugares cerca
     // del lugar indicado por MiMarcador
-  var tipoDeLugar = document.getElementById('tipoDeLugar')
-  tipoDeLugar.addEventListener('change', function () {
-    if (tipoDeLugar.value != '') {
-      //noMostrarMarcadores(marcadores);
-      marcadorModulo.marcar()
-    }
-  })
 
-    // Cuando cambia el elemento "radio" marco todos lugares cerca
-    // del lugar indicado por MiMarcador con el nuevo radio
-
-  var rango = document.getElementById('radio');
-  rango.addEventListener('change', function () {
-    marcadorModulo.marcar()
-  })
-
-  rango.addEventListener('input', function () {
-    mostrarValor(rango.value)
-  })
 
     // Crea marcador que al hacer click muestra la información del lugar.
   crearMarcador = function (lugar) {
@@ -164,27 +143,15 @@ marcadorModulo = (function () {
     // Cre la variable limites que contiene los límites del mapa
     // Llamo a la funcion agregarMarcadoresClicCargarDirecciones() para que marque a los lugares
     // cuando se hace clic en AgregarDirecciones
-  function inicializar () {
-        // Muestra marcador cuando se presioná enteren el campo direccion
-      var nuevaDireccion = document.getElementById('direccion');
 
-        nuevaDireccion.addEventListener('change', function () {
-        marcadorModulo.mostrarMiMarcador(nuevaDireccion.position);
-        alert('estra en inicializar dee marcadores'+nuevaDireccion.position)
-      })
-
-    infoVentana = new google.maps.InfoWindow()
-    limites = new google.maps.LatLngBounds()
-  }
 
     // Función que devuelve true si ya se declaro la variable miMarcador
   function existeMiMarcador () {
-    //alert('mi marcador '+miMarcador.position);
     return miMarcador != undefined
   }
 
     // Devuelve la posicion de la variable miMarcador
-  function damePosicion () {alert('entra a dame posicion');
+  function damePosicion () {
     return miMarcador.getPosition()
   }
 
@@ -214,6 +181,7 @@ marcadorModulo = (function () {
 
       marcadoresRuta.push(marcador)
     }
+
     geocodificadorModulo.usaDireccion(direccion, agregarMarcadorConStreetView)
     mapa.fitBounds(limites)
   }
@@ -221,6 +189,7 @@ marcadorModulo = (function () {
     // Marca los lugares que están en el arreglo resultados y
     // extiende los límites del mapa teniendo en cuenta los nuevos lugares
   function marcarLugares (resultados, status) {
+    //alert('entra a marcar Lugares ')
     noMostrarMarcadores(marcadores);
     if (status === google.maps.places.PlacesServiceStatus.OK) {
       for (var i = 0; i < resultados.length; i++) {
@@ -233,16 +202,51 @@ marcadorModulo = (function () {
     // Marco los lugares cerca de mi posición
   function marcar () {
     //borrarMarcadores(marcadores)
-    //alert('lugar: ' + document.getElementById('tipoDeLugar').value);
-    if (marcadorModulo.existeMiMarcador()) {alert('entra en if');
-      var miPosicion = marcadorModulo.damePosicion()
+    //alert('MIMARCADOR DENTRO DE MARCAR: ' + miMarcador.position);
+    if (existeMiMarcador()) {alert('entra en if de marcar');
+      var miPosicion = marcadorModulo.damePosicion();
+      alert('definicio de mi posicon para mandar a buscar cerca '+  miPosicion);
     } else {alert('entra en else de marcar ');
       miPosicion = posicionCentral
     }
-    //alert('miposicion '+  marcadorModulo.damePosicion());
+
     lugaresModulo.buscarCerca(miPosicion)
         // cambio el centro del mapa a miPosicion
     mapa.panTo(miPosicion)
+  }
+
+
+  var tipoDeLugar = document.getElementById('tipoDeLugar')
+  tipoDeLugar.addEventListener('change', function () {
+    if (tipoDeLugar.value != '') {
+      //noMostrarMarcadores(marcadores);
+      marcadorModulo.marcar()
+    }
+  })
+
+    // Cuando cambia el elemento "radio" marco todos lugares cerca
+    // del lugar indicado por MiMarcador con el nuevo radio
+
+  var rango = document.getElementById('radio');
+  rango.addEventListener('change', function () {
+    marcadorModulo.marcar()
+  })
+
+  rango.addEventListener('input', function () {
+    mostrarValor(rango.value)
+  })
+
+  function inicializar () {
+        // Muestra marcador cuando se presioná enteren el campo direccion
+      var nuevaDireccion = document.getElementById('direccion');
+
+        nuevaDireccion.addEventListener('change', function () {
+        marcadorModulo.mostrarMiMarcador(nuevaDireccion.position);
+        //alert('estra en inicializar dee marcadores'+nuevaDireccion.value)
+      })
+
+    infoVentana = new google.maps.InfoWindow()
+    limites = new google.maps.LatLngBounds()
   }
 
   return {

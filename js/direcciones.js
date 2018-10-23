@@ -25,7 +25,7 @@ direccionesModulo = (function () {
     // Agrega la dirección en las lista de Lugares Intermedios en caso de que no estén
   function agregarDireccionEnLista (direccion, coord) {
     var lugaresIntermedios = document.getElementById('puntosIntermedios')
-
+  //alert('entra en agregar direccion en lista'+ direccion);
     var haceFaltaAgregar = true
     for (i = 0; i < lugaresIntermedios.length; ++i) {
       if (lugaresIntermedios.options[i].text.replace(/\r?\n|\r/g, ' ') === direccion.replace(/\r?\n|\r/g, ' ')) {
@@ -43,11 +43,12 @@ direccionesModulo = (function () {
     // Agrega la dirección en las listas de puntos intermedios y lo muestra con el street view
   function agregarDireccionYMostrarEnMapa (direccion, ubicacion) {
     that = this
-    alert('entra en agregar direcciones y mostrar en mapa de direcciones');
+    //alert('entra en agregar direcciones y mostrar en mapa de direcciones');
     var ubicacionTexto = ubicacion.lat() + ',' + ubicacion.lng();
     agregarDireccionEnLista(direccion, ubicacionTexto)
     mapa.setCenter(ubicacion)
-    streetViewModulo.fijarStreetView(ubicacion)
+    streetViewModulo.fijarStreetView(ubicacion);
+    //alert('entra en agregar direccion y mostrar pra miMarcador'+ubicacion);
     marcadorModulo.mostrarMiMarcador(ubicacion)
   }
 

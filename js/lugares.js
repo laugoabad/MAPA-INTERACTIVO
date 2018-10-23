@@ -30,8 +30,6 @@ lugaresModulo = (function () {
            destinoAutocompletado.setBounds(circulo.getBounds());
           }
 
-
-
         /* Completar la función autocompletar(): autocompleta los 4 campos de texto de la
         página (las direcciones ingresables por el usuario).
         Para esto creá un círculo con radio de 20000 metros y usalo para fijar
@@ -46,7 +44,7 @@ lugaresModulo = (function () {
     // Busca lugares con el tipo especificado en el campo de TipoDeLugar
 
   function buscarCerca (posicion) {
-    //alert('posicion dentro de buscar cerca '+posicion.geometry.location);
+    alert('posicion dentro de buscar cerca '+posicion);
         infowindow = new google.maps.InfoWindow();
         var servicioLugares = new google.maps.places.PlacesService(mapa);
         var radio = document.getElementById('radio').value;
