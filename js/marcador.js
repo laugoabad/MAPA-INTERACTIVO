@@ -181,7 +181,6 @@ marcadorModulo = (function () {
 
       marcadoresRuta.push(marcador)
     }
-
     geocodificadorModulo.usaDireccion(direccion, agregarMarcadorConStreetView)
     mapa.fitBounds(limites)
   }
@@ -203,10 +202,9 @@ marcadorModulo = (function () {
   function marcar () {
     //borrarMarcadores(marcadores)
     //alert('MIMARCADOR DENTRO DE MARCAR: ' + miMarcador.position);
-    if (existeMiMarcador()) {alert('entra en if de marcar');
+    if (existeMiMarcador()) {
       var miPosicion = marcadorModulo.damePosicion();
-      alert('definicio de mi posicon para mandar a buscar cerca '+  miPosicion);
-    } else {alert('entra en else de marcar ');
+    } else {
       miPosicion = posicionCentral
     }
 
@@ -239,7 +237,6 @@ marcadorModulo = (function () {
   function inicializar () {
         // Muestra marcador cuando se presioná enteren el campo direccion
       var nuevaDireccion = document.getElementById('direccion');
-
         nuevaDireccion.addEventListener('change', function () {
         marcadorModulo.mostrarMiMarcador(nuevaDireccion.position);
         //alert('estra en inicializar dee marcadores'+nuevaDireccion.value)

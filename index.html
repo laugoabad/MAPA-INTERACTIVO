@@ -15,7 +15,8 @@
 <body>
     <div id="left-panel">
         <div class="from-to">
-            <div class="medios"> <span class="input-label">Buscar:</span>
+            <div class="medios">
+                <button id="boton-buscar" type="button" >Buscar:</button>
                 <input id="direccion" type="textbox" value=" " placeholder="Ingresa una dirección">
             </div>
             <div class="select-circle">
@@ -37,14 +38,14 @@
             </div>
             <div class="medios"> <span class="input-label">Como:</span>
                 <select id="comoIr">
-                    <option id='auto' value='Auto'> Auto </option>
-                    <option id= 'caminando' value='Caminando'> Caminando </option>
-                    <option id = 'transporte-publico' value='Bus/Subterraneo/Tren'> Transporte Público </option>
+                    <option id='auto' value='DRIVING'> Auto </option>
+                    <option id= 'caminando' value='WALKING'> Caminando </option>
+                    <option id = 'transporte-publico' value='TRANSIT'> Transporte Público </option>
                 </select>
             </div>
             <div class="hide-xs">
                 <div class='agregarPts'>
-                    <span class="input-label">Agregar:</span>
+                    <button id="boton-agregar" type="button" class="input-label">Agregar:</button>
                     <input type="textbox" id="agregar" placeholder="Ingresa una dirección">
                 </div>
                 <label id="labelIntermedios">Lugares Intermedios

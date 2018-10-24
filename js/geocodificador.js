@@ -17,20 +17,33 @@ geocodificadorModulo = (function () {
       }
     });
   }
-
     // Inicializo el geocoder que obtiene las corrdenadas a partir de una dirección
     // La variable dirección es igual al texto ingresado por el usuario
     // Llama a la función usaDirecciin para agregarla a los listados y mostrarlo en el mapa
   function inicializar () {
     var that = this;
     geocodificador = new google.maps.Geocoder();
-    document.querySelector('#direccion').addEventListener('keypress', function (e) {
-      var key = e.which || e.keyCode
-        if (key === 13) {
+
+    document.querySelector('#boton-buscar').addEventListener('click', function () {
       var direccion = document.getElementById('direccion').value;
       that.usaDireccion(direccion, direccionesModulo.agregarDireccionYMostrarEnMapa);
-    }
+  });
+
+    // document.querySelector('#boton-desde').addEventListener('click', function () {
+    //   var direccion = document.getElementById('desde').value;
+    //   that.usaDireccion(direccion, direccionesModulo.agregarDireccionYMostrarEnMapa);
+    // });
+    //
+    // document.querySelector('#boton-hasta').addEventListener('click', function () {
+    //   var direccion = document.getElementById('hasta').value;
+    //   that.usaDireccion(direccion, direccionesModulo.agregarDireccionYMostrarEnMapa);
+    // });
+
+    document.querySelector('#boton-agregar').addEventListener('click', function () {
+      var direccion = document.getElementById('agregar').value;
+      that.usaDireccion(direccion, direccionesModulo.agregarDireccionYMostrarEnMapa);
     });
+
   }
     //     // cuando se presiona la tecla enter en el campo direccion, se agrega la dirección y se muestra en el mapa
     // document.querySelector('#direccion').addEventListener('keypress', function (e) {
